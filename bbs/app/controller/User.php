@@ -42,21 +42,19 @@ class User extends Base
         //验证器验证
         try {
             validate(UserValidate::class)->scene('')->check($data);
-          
         } catch (\Exception $e) {
             return Base::createJson([], 400, $e->getMessage());
         }
 
         //注册并返回账号
-        $id=UserModel::create($data)->getData('userName');
+        $id = UserModel::create($data)->getData('userName');
 
         //判断是否正常返回
         if ($id) {
-            return Base::createJson($id,200,'成功注册！');
-        }else {
-            return Base::createJson([], 400,'注册失败！');
-            }
-
+            return Base::createJson($id, 200, '成功注册！');
+        } else {
+            return Base::createJson([], 400, '注册失败！');
+        }
     }
 
     /**
@@ -95,24 +93,22 @@ class User extends Base
         //获取数据
         $data = $request->param();
 
-         //验证器验证
-         try {
+        //验证器验证
+        try {
             validate(UserValidate::class)->scene('update')->check($data);
-          
         } catch (\Exception $e) {
             return Base::createJson([], 400, $e->getMessage());
         }
 
         //开始更改
-        $id=UserModel::update($data)->getData('userName');
+        $id = UserModel::update($data)->getData('userName');
 
-         //判断是否正常返回
-         if ($id) {
-            return Base::createJson($id,200,'成功更改！');
-        }else {
-            return Base::createJson([], 400,'更改失败！');
-            }
-
+        //判断是否正常返回
+        if ($id) {
+            return Base::createJson($id, 200, '成功更改！');
+        } else {
+            return Base::createJson([], 400, '更改失败！');
+        }
     }
 
     /**
@@ -133,8 +129,70 @@ class User extends Base
             UserModel::find($id)->delete();
             return Base::createJson([], 200, '成功删除');
         } catch (\Error $e) {
-            echo $e->getMessage();
+           // echo $e->getMessage();
             return Base::createJson([], 400, '找不到该数据');
         }
+    }
+
+
+    public function post($id)
+    {
+        //判断id是否为整数
+        if (!Validate::isInteger($id)) {
+            return  $this->createJson([], 400, '输入不是整数！');
+        }
+
+        //获取关联模型下的信息
+        try {
+
+            //获取数据
+            $data = UserModel::find($id)->post()->select();           //post返回hasmany类，不是NULL
+
+            //判断是否为空
+            if ($data->isEmpty()) {
+                return Base::createJson([], 400, '用户没有发过帖子！');
+            } else {
+                return Base::createJson($data, 200, 'sucess');
+            }
+        } catch (\Error $e) {
+
+            return Base::createJson([], 400, '找不到该用户数据！');
+        }
+
+        // if ($data->isEmpty()) {
+        //     return Base::createJson([], 400, '找不到任何数据！');       
+        // } else {
+        //     return Base::createJson($data, 200, 'sucess');
+        // }
+    }
+
+    public function comment($id)
+    {
+        echo 'test';
+        //判断id是否为整数
+        if (!Validate::isInteger($id)) {
+            return  $this->createJson([], 400, '输入不是整数！');
+        }
+
+        //获取关联模型下的信息
+        try {
+            $data = UserModel::find($id)->comment()->select();           //post返回hasmany类，不是NULL
+
+            //判断是否为空
+            if ($data->isEmpty()) {
+                return Base::createJson([], 200, '用户没有评论过！');
+            } else {
+                return Base::createJson($data, 200, 'sucess');
+            }
+        } catch (\Error $e) {
+
+            return Base::createJson([], 400, '找不到该用户数据！');
+        }
+
+        // if ($data->isEmpty()) {
+        //     return Base::createJson([], 400, '找不到任何数据！');       
+        // } else {
+        //     return Base::createJson($data, 200, 'sucess');
+        // }
     }
 }

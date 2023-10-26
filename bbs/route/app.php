@@ -19,6 +19,19 @@ Route::get('hello/:name', 'index/hello');
 
 //用户模块
 Route::resource('user','User');
-
-
 Route::post('user','User/save');
+
+//帖子模块
+Route::resource('post','Post');
+Route::post('post','Post/save');
+
+//回复模块
+Route::resource('comment','Comment');
+Route::post('comment','Comment/save');
+
+//用户对应多个post和commment路由
+Route::get('user/:id/post','User/post');
+Route::get('user/:id/comment','User/comment');
+
+//帖子对应多个comment路由
+Route::get('post/:id/comment','Post/comment');

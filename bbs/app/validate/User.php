@@ -16,7 +16,7 @@ class User extends Validate
     protected $rule = [ 
         'userName|用户名'       =>      'require|chsDash|unique:user',
         'userPassword|密码'     =>      'require|min:6',
-        'userEmail|邮箱'        =>      'require|email|unique:user',
+        'userTelephone|电话'        =>   'require|number',
         'userAge'               =>      'require|integer',
         
 ];
