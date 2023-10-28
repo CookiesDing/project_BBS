@@ -22,4 +22,10 @@ return [
     'taglib_begin'  => '{',
     // 标签库标签结束标记
     'taglib_end'    => '}',
+
+    // 模版替换输出
+    'tpl_replace_string' => [
+        '__JS__' => '../static/js',
+        '__CSS__' => '../static/css',
+        ],
 ];

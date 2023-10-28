@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace app\controller;
+namespace app\api\controller;
 
 use think\Request;
 use app\model\User as UserModel;
 use think\exception\ValidateException;
 use think\facade\Validate;
 use app\validate\User as UserValidate;
+use think\db\Fetch;
 
 class User extends Base
 {
@@ -18,7 +19,8 @@ class User extends Base
      * @return \think\Response
      */
     public function index()
-    {
+    {   
+       
         //返回所有用户参数
         $data = UserModel::select();                           //一般我们在浏览器输入一个网址访问网站都是GET请求   select返回数据集
         if ($data->isEmpty()) {

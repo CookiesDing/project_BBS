@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入 Bootstrap CSS -->
+    {css href="__CSS__/bootstrap.min.css"}
+    {css href="__CSS__/style.css"}
+
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 移动设备优先 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+    <!--核心部分-->
+    <div class="container pt-5 mt-5">
+        <div class="row">
+            <div class="col-3">
+                <button class="btn btn-secondary">用户管理</button>
+            </div>
+            <div class="col-9">
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                        <tr id="data-container">
+                            <th >1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "../api/user",  // 这里是您定义的路由地址
+                data: { },  // 发送的数据
+                success: function (response) {
+                    // 处理Ajax响应
+                    console.log(response);
+                     viewData(response);
+                }
+            });
+        });
+
+        function viewData(response) {
+        // 假设 'data' 是一个 JSON 对象或数组
+        var dataContainer = $('#data-container');
+
+        // // 将 JSON 转换为字符串并插入到数据容器中
+        dataContainer.html(JSON.stringify(response, null, 2));
+    }
+    </script>
+    
+
+    <!-- 引入 JS 文件 -->
+
+    <!-- 引入 JS 文件 -->
+    <!-- <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script> -->
+
+</body>
+
+</html>
