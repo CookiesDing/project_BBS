@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+
+
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 移动设备优先 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+    <!--登录UI-->
+    <div class="d-flex vw-100 vh-100 bg-light justify-content-center align-items-center">
+        <form action="{:url('/admin/login_check')}" method="post" class="p-5 m-5 shadow">
+            <fieldset>
+                <div class="form-group row">
+                    <label for="username" class="col-4 col-form-label">用户名</label>
+                    <div class="col-6">
+                        <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入用户名">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-4 col-form-label">密码</label>
+                    <div class="col-6">
+                        <input type="password" id="userPassword" name="userPassword" class="form-control"
+                            placeholder="请输入密码">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label" style="position:relative;top:-10px;">{:captcha_img()}</label>
+                    <div class="col-6">
+                        <input type="text" id="code" name="code" class="form-control"
+                            placeholder="请输入验证码">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2"></label>
+                    <div class="col-8">
+                        <input type="hidden" value="{:token()}" name="__token__">
+                        <button class="btn btn-success w-100">登录</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <!-- 引入 JS 文件 -->
+    {js href="__JS__/jquery-3.3.1.min.js"}
+    {js href="__JS__/bootstrap.bundle.min.js"}
+
+</body>
+
+</html>

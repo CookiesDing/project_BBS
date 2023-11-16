@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+
+
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 移动设备优先 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+    <!--简易提示-->
+    <div class="d-flex vw-100 vh-100 bg-light justify-content-center
+align-items-center">
+        <div class="toast show mb-5 pl-3 pr-3">
+            <div class="toast-header">
+                <strong>● 系统提示</strong>
+            </div>
+            <div class="toast-body">
+                <ol class="text-danger">
+                   
+                    {$infos}
+                  
+                </ol>
+                <a href="{$url_path}" class="btn btn-primary  btn-smw-100">{$url_text}</a>
+            </div>
+        </div>
+    </div>
+    <!-- 引入 JS 文件 -->
+    {js href="__JS__/jquery-3.3.1.min.js"}
+    {js href="__JS__/bootstrap.bundle.min.js"}
+
+</body>
+
+</html>

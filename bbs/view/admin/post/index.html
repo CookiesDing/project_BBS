@@ -1,0 +1,75 @@
+{extend name="../public/base"}
+{block name='title'}用户列表{/block}
+{block name='main'}
+
+<form action="{:url('/admin/post')}" class="pb-3"> <!-- 为http://127.0.0.1:8000/ admin/user.html-->
+    <div class="form-row">
+        <div class="col-form-label">
+            <label for="username">发布者ID：</label>
+        </div>
+        <div class="col-2">
+            <input type="text" name="postUserID" id="postUserID" class="form-control" placeholder="查询的用户ID">
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary">搜索</button>
+        </div>
+    </div>
+</form>
+<!-- 数据列表 -->
+<table class="table table-bordered">
+    <thead class="bg-light main">
+        <tr id>
+            <th class="text-center {$orderPostID == 'desc' ? '' : 'dropup'}">
+                <a href="{:url('/admin/user')}?&userID={$orderPostID}" class="dropdown-toggle
+                text-secondary text-decoration-none">ID</a>
+            </th>
+            <th class="text-center">发布者ID</th>
+            <th class="text-center">帖子名称</th>
+            <th class="text-center">帖子内容</th>
+            <th class="text-center">发布时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {assign name="empty" value='<tr>
+            <td colspan="9" class="text-center text-muted">没有数据</td>
+        </tr>'}
+        {volist name="list" id="obj" empty="$empty"}
+        <tr>
+            <td class="text-center">{$obj.postID}</td>
+            <td class="text-center">{$obj.postUserID}</td>
+            <td class="text-center" style="font-size: 14px;">{$obj.postTitle}</td>
+            <td class="text-center" style="font-size: 12px;">{$obj.postContent}</td>
+            <td class="text-center">{$obj.postTime}</td>
+
+
+            <td>
+                <form action="{:url('/admin/post/'.$obj.postID)}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="'btn btn-danger btn-sm btn-delete">删除</button>
+                    <a href="{:url('/admin/post/'.$obj.postID.'/edit')}" class="btn btn-warning btn-sm">修改</a>
+                  
+
+                </form>
+            </td>
+        </tr>
+        {/volist}
+    </tbody>
+
+</table>
+
+<!-- 分页 -->
+
+
+{$list|Raw}
+
+{/block}
+{block name='js'}
+<script type="text/javascript">
+    $('.btn-delete').click(() => {
+        let flag = confirm('真的要删除这条数据吗？');
+        return flag ? true : false;
+    })
+</script>
+
+{/block}

@@ -1,0 +1,106 @@
+{extend name="../public/base"}
+{block name='title'}创建用户{/block}
+{block name='main'}
+ <!-- 添加用户UI -->
+ <form action="{:url('/admin/user')}" method="post">
+    <fieldset class="w-75">
+        <div class="form-group row">
+            <label for="username" class="col-2 col-form-label">用户名</label>
+            <div class="col-8">
+                <input type="text" id="userName" name="userName" class="form-control"
+                    placeholder="请输入用户名">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-2 col-form-label">密码</label>
+            <div class="col-8">
+                <input type="password" id="userPassword" name="userPassword" class="form-control"
+                    placeholder="请输入至少6位密码">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="passwordnot" class="col-2 col-form-label">密码确认
+            </label>
+            <div class="col-8">
+                <input type="password" id="userPasswordNot" name="userPasswordNot" class="form-control"
+                    placeholder="请输入密码确认">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2">性别</label>
+            <div class="col-8">
+                <label for="man" class="col-form-label">
+                    <input type="radio" id="man" name="userSex" value="male" checked>
+                    男
+                </label>
+                <label for="woman" class="col-form-label">
+                    <input type="radio" id="woman" name="userSex" value="female">
+                    女
+                </label>
+            </div>
+        </div>
+
+        <input type='hidden'id="timestamp" name="userRegisterTime" value="">
+
+        <!-- <div class="form-group row">
+            <label for="email" class="col-2 col-form-label">电子邮箱</label>
+            <div class="col-8">
+                <input type="text" id="email" name="userTelephone" class="form-control" placeholder="请输入电子邮箱">
+            </div>
+        </div> -->
+        <div class="form-group row">
+            <label class="col-2"></label>
+            <div class="col-6">
+                <label for="agree">
+                    <input type="checkbox" id="agree" name="agree">
+                    <span class="col-form-label-sm">我已同意公约</span>
+                </label>
+            </div>
+            <div class="col-2 text-right">
+                <a href="{:url('/admin/user')}" class="col-form-label-sm">返回列表
+                </a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2"></label>
+            <div class="col-8">
+                <input type="hidden" value="{:token()}" name="__token__">
+                <button class="btn btn-success w-100">添加用户</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{/block}      
+
+
+{block name='js'}
+<script>
+    // 获取当前时间并格式化为 YYYYMMDDHHMMSS
+    function getCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const formattedDateTime = `${year}${month}${day}${hours}${minutes}${seconds}`;
+        return formattedDateTime;
+    }
+
+    // 更新<input>标签的 value 属性
+    function updateInputValue() {
+        const inputElement = document.getElementById('timestamp');
+        const currentDateTime = getCurrentDateTime();
+        inputElement.value = currentDateTime;
+    }
+
+    // 当页面加载时更新<input>标签的 value 属性
+    updateInputValue();
+</script>
+
+{/block}
+
+                
+
