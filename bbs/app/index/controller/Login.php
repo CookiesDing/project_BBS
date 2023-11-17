@@ -1,8 +1,9 @@
 <?php
 
-namespace app\admin\controller;
+namespace app\index\controller;
 use app\model\User as UserModel;
 use app\Request;
+use think\facade\Session;
 use think\facade\Validate;
 
 class Login
@@ -13,7 +14,7 @@ class Login
     }
     public function check(Request $request)
     {
-       
+        //   dd($request->all());
 
         //获得数据
         $data = $request->param();
@@ -47,15 +48,15 @@ class Login
             return view('view/public/toast.html', [
                 'infos' => $errors[0],
                 'url_text' => '返回登陆',
-                'url_path' => url('/admin/login/')
+                'url_path' => url('/index/login/')
             ]);
         } else {
             $user=UserModel::where('userName', $data['userName'])->find();
-            return json($user);
-            // session('userID', $data['userID']);
+            // return json($user);
             session('admin', $data['userName']);
-            
-            return redirect('/admin/user');
+            session('userID', $user['userID']);
+            return redirect('/index/index');
+            // dump(Session::all());
         }
     }
 
@@ -63,6 +64,6 @@ class Login
     {
         session('admin', null);
         session('userID', null);
-        return redirect('/admin/login/');
+        return redirect('/index/index/');
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\admin\controller;
+namespace app\index\controller;
 
 use think\Request;
 use app\model\User as UserModel;
@@ -11,7 +11,6 @@ use app\api\controller\User as UserApi;
 use think\Collection;
 use app\validate\User as UserValidate;
 use think\exception\ValidateException;
-use think\facade\Session;
 
 class User
 {
@@ -25,7 +24,7 @@ class User
      */
     public function index()
     {
-        // dump(Session::all());
+
         return view('/user/index', [                                                     //相对路径：目录在 view\admin下 根目录为admin.    
             'list'  => UserModel::withSearch(['userSex', 'userName', 'userTelephone','userRegisterTime','userID'], [        //如果view函数的地址中 为view/public/toast ，则会访问view\admin\view\public\toast.html，符合针对根目录admin的后续访问规则。
                 'userSex' => request()->param('userSex'),                                       //如果view函数地址 为view/public/toast.html  通过访问/admin/user.html可以成功访问到视图 模板文件存在:view/public/toast.html
@@ -75,7 +74,7 @@ class User
             return view('view/public/toast.html', [                  //目录在 view\admin下 根目录为admin  认为view函数中末尾加入了.html会转换到bbs目录下
                 'infos' => $e->getError(),
                 'url_text' => '返回上一页',
-                'url_path' => url('/admin/user/create')
+                'url_path' => url('/index/user/create')
             ]);
         }
 
@@ -87,7 +86,7 @@ class User
             return view('view/public/toast.html', [
                 'infos' => '注册成功',
                 'url_text' => '去首页',
-                'url_path' => url('/admin/user/')
+                'url_path' => url('/index/index')
             ]);
         } else {
             return '注册失败';
@@ -173,14 +172,6 @@ class User
     public function delete($id)
     {
         //
-        if (UserModel::destroy($id)) {
-            return view('view/public/toast.html', [
-                'infos' => '删除成功',
-                'url_text' => '去首页',
-                'url_path' => url('/admin/user/')        //传递给view模板，按照http://127.0.0.1:8000/处理。
-            ]);
-        } else {
-            return '删除失败';
-        }
+
     }
 }
