@@ -33,7 +33,7 @@ class User extends Model
     }
 
     //userName搜索器
-    public function searchUserNameAttr($query, $value)   //代表sql查询器  代表name值
+    public function searchUserNameAttr($query, $value)   
     {
         //如果UserSex为空
         if (empty($value)) {
@@ -44,7 +44,7 @@ class User extends Model
     }
 
     //usertele搜索器
-    public function searchUserTelephoneAttr($query, $value)   //代表sql查询器  代表userSex值
+    public function searchUserTelephoneAttr($query, $value)   
     {
         //如果UserSex为空
         if (empty($value)) {
@@ -55,7 +55,7 @@ class User extends Model
     }
 
    //userSex获取器
-   public function getUserSexAttr( $value)   //代表当前字段的值
+   public function getUserSexAttr( $value)  
    {
       $userSex=['male'=>'男','female'=>'女'];
       return $userSex[$value];
@@ -72,8 +72,8 @@ class User extends Model
         }
     }
 
-    //userRegistetime搜索器
-    public function searchUserIDAttr($query, $value)   //代表sql查询器  代表userSex值
+    //userID搜索器
+    public function searchUserIDAttr($query, $value)   
     {
         //如果UserSex为空
         if (empty($value)) {

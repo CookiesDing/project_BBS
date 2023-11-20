@@ -25,11 +25,12 @@ class Post
     {
 
         return view('/post/index', [                                                     //相对路径：目录在 view\admin下 根目录为admin.    
-            'list'  => PostModel::withSearch(['postID', 'postUserID', 'postTitle', 'postContent'], [        //如果view函数的地址中 为view/public/toast ，则会访问view\admin\view\public\toast.html，符合针对根目录admin的后续访问规则。
+            'list'  => PostModel::withSearch(['postID', 'postUserID', 'postTitle', 'postContent','postTime'], [        //如果view函数的地址中 为view/public/toast ，则会访问view\admin\view\public\toast.html，符合针对根目录admin的后续访问规则。
                 'postID' => request()->param('postID'),                                       //如果view函数地址 为view/public/toast.html  通过访问/admin/user.html可以成功访问到视图 模板文件存在:view/public/toast.html
                 'postUserID' => request()->param('postUserID'),
                 'postTitle' => request()->param('postTitle'),
                 'postContent' => request()->param('postContent'),
+                'postTime' => request()->param('postTime'),        
             ])->paginate(
                 [
                     'list_rows' => 8,

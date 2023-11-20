@@ -51,10 +51,10 @@ class Login
             ]);
         } else {
             $user=UserModel::where('userName', $data['userName'])->find();
-            return json($user);
+            // return json($user);
             // session('userID', $data['userID']);
             session('admin', $data['userName']);
-            
+            session('userID', $user['userID']);
             return redirect('/admin/user');
         }
     }

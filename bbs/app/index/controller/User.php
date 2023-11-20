@@ -25,7 +25,7 @@ class User
     public function index()
     {
 
-        return view('/user/index', [                                                     //相对路径：目录在 view\admin下 根目录为admin.    
+        return view('/user/index', [                                                     //相对路径：目录在 view\index下 根目录为index.    
             'list'  => UserModel::withSearch(['userSex', 'userName', 'userTelephone','userRegisterTime','userID'], [        //如果view函数的地址中 为view/public/toast ，则会访问view\admin\view\public\toast.html，符合针对根目录admin的后续访问规则。
                 'userSex' => request()->param('userSex'),                                       //如果view函数地址 为view/public/toast.html  通过访问/admin/user.html可以成功访问到视图 模板文件存在:view/public/toast.html
                 'userName' => request()->param('userName'),
@@ -113,7 +113,7 @@ class User
     public function edit($id)
     {
         //
-        return view('edit', [
+        return view('/user/index', [
             'obj'=>UserModel::find($id)
         ]);
     }
@@ -129,7 +129,7 @@ class User
     {
         //
         $data = $request->param();
-          //  dump($data);
+            dump($data);
         //    dump($request->param('userRegisterTime'));
         try {
             validate(UserValidate::class)->scene('update')->check($data);
@@ -138,7 +138,7 @@ class User
             return view('view/public/toast.html', [                  //目录在 view\admin下 根目录为admin  认为view函数中末尾加入了.html会转换到bbs目录下
                 'infos' => $e->getError(),
                 'url_text' => '返回上一页',
-                'url_path' => url('/admin/user/'.$id.'/edit')
+                'url_path' => url('/index/index/'.$id.'/edit')
             ]);
         }
        
@@ -156,7 +156,7 @@ class User
             return view('view/public/toast.html', [
                 'infos' => '修改成功',
                 'url_text' => '去首页',
-                'url_path' => url('/admin/user/')
+                'url_path' => url('/index/index/')
             ]);
         } else {
             return '修改失败';

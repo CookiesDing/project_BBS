@@ -10,6 +10,18 @@
         <div class="col-2">
             <input type="text" name="postUserID" id="postUserID" class="form-control" placeholder="查询的用户ID">
         </div>
+        <div class="col-form-label">
+            <label for="postTitle">帖子名称：</label>
+        </div>
+        <div class="col-2">
+            <input type="text" name="postTitle" id="postTitle" class="form-control" placeholder="查询的帖子名称">
+        </div>
+        <div class="col-form-label">
+            <label for="postTitle">帖子内容：</label>
+        </div>
+        <div class="col-2">
+            <input type="text" name="postContent" id="postContent" class="form-control" placeholder="查询的帖子内容">
+        </div>
         <div class="col-auto">
             <button class="btn btn-primary">搜索</button>
         </div>
@@ -18,15 +30,18 @@
 <!-- 数据列表 -->
 <table class="table table-bordered">
     <thead class="bg-light main">
-        <tr id>
+        <tr >
             <th class="text-center {$orderPostID == 'desc' ? '' : 'dropup'}">
-                <a href="{:url('/admin/user')}?&userID={$orderPostID}" class="dropdown-toggle
+                <a href="{:url('/admin/post')}?&postID={$orderPostID}" class="dropdown-toggle
                 text-secondary text-decoration-none">ID</a>
             </th>
             <th class="text-center">发布者ID</th>
             <th class="text-center">帖子名称</th>
             <th class="text-center">帖子内容</th>
-            <th class="text-center">发布时间</th>
+            <th class="text-center {$orderTime == 'desc' ? '' : 'dropup'}">
+                <a href="{:url('/admin/post')}?&postTime={$orderTime}" class="dropdown-toggle
+                text-secondary text-decoration-none">发布时间</a>    
+            </th>
             <th>操作</th>
         </tr>
     </thead>
@@ -60,8 +75,8 @@
 
 <!-- 分页 -->
 
-
 {$list|Raw}
+
 
 {/block}
 {block name='js'}

@@ -14,8 +14,8 @@ class Post extends Validate
      * @var array
      */
     protected $rule = [
-        'postTitle' => 'require|max:30',
-        'postContent' => 'require|max:255',
+        'postTitle|发帖名称' => 'require|max:30',
+        'postContent|发帖内容' => 'require|max:255',
     ];
 
     /**

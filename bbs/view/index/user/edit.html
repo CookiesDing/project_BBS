@@ -1,7 +1,7 @@
 {extend name="../public/base"}
 {block name='title'}修改用户{/block}
 {block name='main'}
-<form action="{:url('/admin/user/'.$obj.userID)}" method="post">
+<form action="{:url('/index/user/'.$obj.userID)}" method="post">
     <input type="hidden" name="_method" value="put">
     <fieldset class="w-75">
         <div class="form-group row">
@@ -14,7 +14,7 @@
         <div class="form-group row">
             <label for="newpassword" class="col-2 col-form-label">新密码</label>
             <div class="col-8">
-                <input type="password" id="newpassword" name="newpassword" class="form-control"
+                <input type="newpassword" id="newpassword" name="newpassword" class="form-control"
                     placeholder="请输入新密码(选填)">
             </div>
         </div>
@@ -69,7 +69,7 @@
                 </label>
             </div>
             <div class="col-2 text-right">
-                <a href="{:url('/admin/user')}" class="col-form-label-sm">返回列表
+                <a href="{:url('/index/index')}" class="col-form-label-sm">返回列表
                 </a>
             </div>
         </div>
