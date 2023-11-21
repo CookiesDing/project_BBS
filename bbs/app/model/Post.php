@@ -25,11 +25,24 @@ class Post extends Model
          
           if (empty($value)) {
               return ' ';
-          } else {
+          }
+          else if(is_numeric($value)){
+            return $query->where('postID','=',$value);   //搜索
+        }  
+          else {
               return $query->order('postID',$value);        //排序
           }
       }
 
+    //   public function searchPostIDAttr($query, $value)   //代表sql查询器  代表userSex值
+    // {
+    //     //如果UserSex为空
+    //     if (empty($value)) {
+    //         return ' ';
+    //     } else {
+    //         return $query->where('userID','=',$value);   //搜索
+    //     }
+    // }
 
           //userRegistetime搜索器
     public function searchPostTimeAttr($query, $value)   //代表sql查询器  代表userSex值
@@ -69,9 +82,11 @@ class Post extends Model
         if (empty($value)) {
             return ' ';
         } else {
-            return $query->where('postUserID','like','%'.$value.'%');   //搜索
+            return $query->where('postUserID','=',$value);   //搜索
         }
     }
+
+    
 
 
 }

@@ -5,19 +5,25 @@
 <form action="{:url('/admin/post')}" class="pb-3"> <!-- 为http://127.0.0.1:8000/ admin/user.html-->
     <div class="form-row">
         <div class="col-form-label">
-            <label for="username">发布者ID：</label>
+            <label for="postID">帖子ID:</label>
+        </div>
+        <div class="col-1">
+            <input type="text" name="postID" id="postID" class="form-control" placeholder="帖子ID">
+        </div>
+        <div class="col-form-label">
+            <label for="username">发布者ID:</label>
         </div>
         <div class="col-2">
             <input type="text" name="postUserID" id="postUserID" class="form-control" placeholder="查询的用户ID">
         </div>
         <div class="col-form-label">
-            <label for="postTitle">帖子名称：</label>
+            <label for="postTitle">帖子名称:</label>
         </div>
         <div class="col-2">
             <input type="text" name="postTitle" id="postTitle" class="form-control" placeholder="查询的帖子名称">
         </div>
         <div class="col-form-label">
-            <label for="postTitle">帖子内容：</label>
+            <label for="postTitle">帖子内容:</label>
         </div>
         <div class="col-2">
             <input type="text" name="postContent" id="postContent" class="form-control" placeholder="查询的帖子内容">
@@ -63,7 +69,7 @@
                     <input type="hidden" name="_method" value="delete">
                     <button class="'btn btn-danger btn-sm btn-delete">删除</button>
                     <a href="{:url('/admin/post/'.$obj.postID.'/edit')}" class="btn btn-warning btn-sm">修改</a>
-                  
+                    <a href="{:url('/admin/comment/?commentPostID='.$obj.postID.'#')}" class="btn btn-success btn-sm">查看帖子</a>     
 
                 </form>
             </td>

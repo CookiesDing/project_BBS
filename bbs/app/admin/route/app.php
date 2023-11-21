@@ -30,6 +30,11 @@ Route::post('user', 'User/save');
 Route::resource('post', 'Post');
 Route::post('post', 'Post/save');
 
+
+//评论模块
+Route::resource('comment', 'Comment');
+Route::post('comment', 'Comment/save');
+
 //登录模块路由
 Route::group(function () {
     Route::get('login', 'Login/index')->middleware(function ($request, \Closure

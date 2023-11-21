@@ -134,5 +134,15 @@ class Post
      */
     public function delete($id)
     {
+        //
+        if (PostModel::destroy($id)) {
+            return view('view/public/toast.html', [
+                'infos' => '删除成功',
+                'url_text' => '去首页',
+                'url_path' => url('/admin/post/')        //传递给view模板，按照http://127.0.0.1:8000/处理。
+            ]);
+        } else {
+            return '删除失败';
+        }
     }
 }

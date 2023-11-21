@@ -78,8 +78,22 @@ class User extends Model
         //如果UserSex为空
         if (empty($value)) {
             return ' ';
-        } else {
-            return $query->order('userID',$value);
+        }
+        else if(is_numeric($value)){
+            return $query->where('userID','=',$value);   //搜索
+        } 
+        else {
+            return $query->order('userID',$value);      //排序
         }
     }
+
+    // public function searchUserIDAttr($query, $value)   //代表sql查询器  代表userSex值
+    // {
+    //     //如果UserSex为空
+    //     if (empty($value)) {
+    //         return ' ';
+    //     } else {
+    //         return $query->where('userID','=',$value);   //搜索
+    //     }
+    // }
 }

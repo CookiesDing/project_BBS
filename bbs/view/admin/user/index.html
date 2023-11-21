@@ -5,18 +5,24 @@
 <form action="{:url('/admin/user')}" class="pb-3"> <!-- 为http://127.0.0.1:8000/ admin/user.html-->
     <div class="form-row">
         <div class="col-form-label">
-            <label for="username">用户名：</label>
+            <label for="userID">用户ID:</label>
+        </div>
+        <div class="col-1">
+            <input type="text" name="userID" id="userID" class="form-control" placeholder="用户ID">
+        </div>
+        <div class="col-form-label">
+            <label for="username">用户名:</label>
         </div>
         <div class="col-2">
             <input type="text" name="userName" id="userName" class="form-control" placeholder="查询的用户名">
         </div>
         <div class="col-form-label">
-            <label for="email">电话：</label>
+            <label for="email">电话:</label>
         </div>
         <div class="col-2">
             <input type="text" name="userTelephone" id="userTelephone" class="form-control" placeholder="查询的电话">
         </div>
-        <div class="col-form-label">
+        <!-- <div class="col-form-label">
             <label for="gender">性别：</label>
         </div>
         <div class="col-2">
@@ -25,7 +31,7 @@
                 <option value="male">男</option>
                 <option value="female">女</option>
             </select>
-        </div>
+        </div> -->
         <div class="col-auto">
             <button class="btn btn-primary">搜索</button>
             <a href="{:url('/admin/user/create')}" class="btn btn-success">添加用户</a>
@@ -75,7 +81,8 @@
                     <input type="hidden" name="_method" value="delete">
                     <button class="'btn btn-danger btn-sm btn-delete">删除</button>
                     <a href="{:url('/admin/user/'.$obj.userID.'/edit')}" class="btn btn-warning btn-sm">修改</a>
-                    <a href="{:url('/admin/post/?postUserID='.$obj.userID.'')}" class="btn btn-success btn-sm">查看帖子</a>
+                    <a href="{:url('/admin/post/?postUserID='.$obj.userID.'#')}" class="btn btn-success btn-sm">查看帖子</a>        
+                    <!-- 添加#  -->
                 </form>
             </td>
         </tr>

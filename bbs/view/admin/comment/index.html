@@ -1,0 +1,88 @@
+{extend name="../public/base"}
+{block name='title'}用户列表{/block}
+{block name='main'}
+
+<form action="{:url('/admin/comment')}" class="pb-3"> <!-- 为http://127.0.0.1:8000/ admin/user.html-->
+    <div class="form-row">
+        <div class="col-form-label">
+            <label for="commentPostID">帖子ID:</label>
+        </div>
+        <div class="col-2">
+            <input type="text" name="commentPostID" id="commentPostID" class="form-control" placeholder="查询的帖子ID">
+        </div>
+        <div class="col-form-label">
+            <label for="commentUserID">用户ID:</label>
+        </div>
+        <div class="col-2">
+            <input type="text" name="commentUserID" id="commentUserID" class="form-control" placeholder="查询的用户ID">
+        </div>
+        <div class="col-form-label">
+            <label for="commentContent">评论内容:</label>
+        </div>
+        <div class="col-2">
+            <input type="text" name="commentContent" id="commentContent" class="form-control" placeholder="查询的评论内容">
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary">搜索</button>
+        </div>
+    </div>
+</form>
+<!-- 数据列表 -->
+<table class="table table-bordered">
+    <thead class="bg-light main">
+        <tr>
+            <th class="text-center">
+                评论ID
+            </th>
+            <th class="text-center">评论帖子ID</th>
+            <th class="text-center">评论用户ID</th>
+            <th class="text-center">评论内容</th>
+            <th class="text-center ">
+                评论时间
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {assign name="empty" value='<tr>
+            <td colspan="9" class="text-center text-muted">没有数据</td>
+        </tr>'}
+        {volist name="list" id="obj" empty="$empty"}
+        <tr>
+            <td class="text-center">{$obj.commentID}</td>
+            <td class="text-center">{$obj.commentPostID}</td>
+            <td class="text-center" style="font-size: 14px;">{$obj.commentUserID}</td>
+            <td class="text-center" style="font-size: 12px;">{$obj.commentContent}</td>
+            <td class="text-center">{$obj.commentTime}</td>
+
+
+            <td>
+                <form action="{:url('/admin/comment/'.$obj.commentID)}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="'btn btn-danger btn-sm btn-delete">删除</button>
+                    <a href="{:url('/admin/comment/'.$obj.commentID.'/edit')}" class="btn btn-warning btn-sm">修改</a>
+
+
+                </form>
+            </td>
+        </tr>
+        {/volist}
+    </tbody>
+
+</table>
+
+<!-- 分页 -->
+
+{$list|Raw}
+
+
+{/block}
+{block name='js'}
+<script type="text/javascript">
+    $('.btn-delete').click(() => {
+        let flag = confirm('真的要删除这条数据吗？');
+        return flag ? true : false;
+    })
+</script>
+
+{/block}

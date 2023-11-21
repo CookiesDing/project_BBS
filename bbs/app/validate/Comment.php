@@ -14,7 +14,7 @@ class Comment extends Validate
      * @var array
      */
     protected $rule = [
-        'commentContent' => 'require|max:255',
+        'commentContent|回复内容' => 'require|max:255',
     ];
 
     /**
