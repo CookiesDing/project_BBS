@@ -17,12 +17,15 @@ Route::group(function () {
      return $next($request);
  });
 
+ //帖子模块
  Route::resource('index', 'Index');
 //用户模块
 Route::resource('user', 'User');
 Route::post('user', 'User/save');
 
-
+//评论模块
+Route::resource('comment', 'Comment');
+Route::post('comment', 'Comment/save');
 
 //登录模块路由
 Route::group(function () {

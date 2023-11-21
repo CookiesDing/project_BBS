@@ -32,16 +32,6 @@
         /* 调整标题与内容的间距 */
     }
 
-    .post-time {
-        font-size: 0.8rem;
-        color: #6c757d;
-        /* Bootstrap 中的文本次要颜色 */
-        margin-top: auto;
-        /* 将发布时间推到卡片底部 */
-        text-align: right;
-        /* 将发布时间右对齐 */
-    }
-
     .post-info {
         font-size: 0.8rem;
         color: #6c757d;
@@ -49,7 +39,7 @@
         margin-top: auto;
         /* 将发布信息推到卡片底部 */
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between !important;
         /* 将发布时间和发布人分别靠左和靠右对齐 */
     }
 
@@ -86,6 +76,20 @@
     a:hover {
         text-decoration: none;
     }
+
+    /* a,
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    } */
+
+    .card-body a {
+    text-decoration: none; /* 移除下划线 */
+    color: inherit; /* 继承父元素的文本颜色 */
+}
 </style>
 </head>
 
@@ -105,14 +109,14 @@
             <div class="col-2">
                 <input type="text" name="userName" id="userName" class="form-control" placeholder="">
             </div>
-           
+
             <div class="col-auto">
                 <button class="btn btn-primary">搜索</button>
-                
+
             </div>
 
-            <th  class="text-center {$orderTime == 'desc' ? '' : 'dropup'}">
-                <a  style="margin-top:8px;margin-left:400px" href="{:url('/index/index')}?&postTime={$orderTime}" class="dropdown-toggle
+            <th class="text-center {$orderTime == 'desc' ? '' : 'dropup'}">
+                <a style="margin-top:8px;margin-left:400px" href="{:url('/index/index')}?&postTime={$orderTime}" class="dropdown-toggle
                 text-secondary text-decoration-none">时间排序</a>
             </th>
         </div>
@@ -126,13 +130,19 @@
             <!-- 第一个帖子 -->
             <div class="col-12">
                 <div class="card">
+                    <a style=" text-decoration: none; color: inherit;"href="{:url('/index/comment/?PostID='.$obj.postID.'#')}">
                     <div class="card-body">
-                        <h5 class="card-title post-title">{$obj.postTitle}</h5>
-                        <p class="card-text">{$obj.postContent}</p>
-                        <p class="post-info">
-                            <span>发布时间:{$obj.postTime}</span>
-                            <span class="post-author">发布人:{$obj.userName}</span>
+                      
+                            <h5 class="card-title post-title">
+                                {$obj.postTitle}
+                            </h5>
+                            <p class="card-text">{$obj.postContent}</p>
+                            <p class="post-info ">
+                                <span>发布时间:{$obj.postTime}</span>
+                                <span class="post-author">发布人:{$obj.userName}</span>
+                        
                     </div>
+                </a>
                 </div>
             </div>
         </div>

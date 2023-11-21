@@ -1,0 +1,85 @@
+{extend name="../public/baseFront"}
+{block name='title'}帖子页面{/block}
+{block name='main'}
+
+<style>
+    /* 自定义样式 */
+    .post-content {
+        background-color: #f8f9fa;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        /* 圆角 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* 阴影 */
+    }
+
+    .comment-section {
+        background-color: #e2e3e5;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment {
+        border-top: 1px solid #d6d8db;
+        padding-top: 15px;
+        margin-top: 15px;
+    }
+
+    .reply-section {
+        background-color: #d6d8db;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<body>
+
+    <div class="container mt-5">
+
+        <!-- 主题区 -->
+        <div class="post-content">
+            <h2>帖子标题</h2>
+            <p>帖子内容，这是帖子的详细描述。可以包含更多信息。</p>
+        </div>
+
+        <!-- 评论区 -->
+        <div class="comment-section">
+            <h3>评论区</h3>
+
+            <!-- 评论 1 -->
+            <div class="comment">
+                <p><strong>用户1:</strong> 这是评论的内容。评论可以很长，根据需要进行调整。</p>
+            </div>
+
+            <!-- 评论 2 -->
+            <div class="comment">
+                <p><strong>用户2:</strong> 另一个用户的评论内容。这里可以包含更多评论。</p>
+            </div>
+
+            <!-- 可以添加更多评论 -->
+
+        </div>
+
+        <!-- 回复区 -->
+        <div class="reply-section">
+            <h3>回复区</h3>
+
+            <!-- 回复表单 -->
+            <form>
+                <div class="form-group">
+                    <label for="reply">回复内容:</label>
+                    <textarea class="form-control" id="reply" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">提交回复</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+{/block}
