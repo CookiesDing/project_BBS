@@ -42,7 +42,16 @@ class index_view extends Model
             return $query->order('postTime', $value);
         }
     }
-
+     //pPostLastReplyTime搜索器
+     public function searchPostLastReplyTimeAttr($query, $value)   //代表sql查询器  代表userSex值
+     {
+         //如果UserSex为空
+         if (empty($value)) {
+             return ' ';
+         } else {
+             return $query->order('PostLastReplyTime', $value);         //排序
+         }
+     }
 
 
     //userName搜索器

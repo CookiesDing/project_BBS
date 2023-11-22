@@ -6,7 +6,11 @@
     /* 自定义样式 */
     .post-content {
         background-color: #f8f9fa;
-        padding: 20px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 5px;
+
         margin-bottom: 20px;
         border-radius: 10px;
         /* 圆角 */
@@ -26,6 +30,20 @@
         border-top: 1px solid #d6d8db;
         padding-top: 15px;
         margin-top: 15px;
+        position: relative;
+    }
+
+    .spacer {
+        margin-bottom: 20px; /* 调整留白的大小 */
+    }
+
+    .reply-time {
+        font-size: 12px;
+        color: #888;
+        position: absolute;
+        bottom: -20px;
+        right: 0;
+        margin: 0px;
     }
 
     .reply-section {
@@ -34,45 +52,77 @@
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+    .post-info {
+        font-size: 0.8rem;
+        color: #6c757d;
+        /* Bootstrap 中的文本次要颜色 */
+        margin-top: auto;
+       
+        /* 将发布信息推到卡片底部 */
+        display: flex;
+        justify-content: space-between !important;
+        /* 将发布时间和发布人分别靠左和靠右对齐 */
+    }
+
+    .post-author {
+        margin-left: 0px;
+        /* 设置发布人信息与发布时间的间距 */
+    }
 </style>
 
 <body>
 
     <div class="container mt-5">
-
+        {assign name="empty" value='<tr>
+            <td colspan="9" class="text-center text-muted">还没有评论！</td>
+        </tr>'}
+        {volist name="list_post" id="obj_post"}
         <!-- 主题区 -->
         <div class="post-content">
-            <h2>帖子标题</h2>
-            <p>帖子内容，这是帖子的详细描述。可以包含更多信息。</p>
+            <h2>{$obj_post.postTitle}</h2>
+            <p>{$obj_post.postContent}</p>
+            <p class="post-info ">
+                <span class="post-author">发布人:{$obj_post.userName}</span>
+                <span>{$obj_post.postTime}</span>
+                
+            </p>
         </div>
-
+        {/volist}
         <!-- 评论区 -->
         <div class="comment-section">
             <h3>评论区</h3>
-
-            <!-- 评论 1 -->
+           
+            {volist name="list_comment" id="obj_comment" empty="$empty"}
             <div class="comment">
-                <p><strong>用户1:</strong> 这是评论的内容。评论可以很长，根据需要进行调整。</p>
+                <p><strong>{$obj_comment.userName}:</strong> {$obj_comment.commentContent}</p>
+                <div class="spacer"></div> <!-- 空的div用于留出空间 -->
+                <p class="reply-time">{$obj_comment.commentTime}</p>
             </div>
 
-            <!-- 评论 2 -->
-            <div class="comment">
-                <p><strong>用户2:</strong> 另一个用户的评论内容。这里可以包含更多评论。</p>
-            </div>
-
-            <!-- 可以添加更多评论 -->
-
+            {/volist}
         </div>
-
+        <!-- 分页 -->
+    <div style="margin:10px 10px 20px 30px;height:80px;">
+        {$list_comment|Raw}
+    </div>
+       
         <!-- 回复区 -->
         <div class="reply-section">
             <h3>回复区</h3>
 
             <!-- 回复表单 -->
-            <form>
+            <form action="{:url('/index/comment')}" method="post" >      <!-- 必须提供comment所有需要的参数 -->
+                <input type='hidden'id="commentID" name="commentID" value="">
+                {volist name="list_post" id="obj"}
+                <input type='hidden'id="commentPostID" name="commentPostID" value="{$obj.postID}">
+                {/volist}
+                <input type='hidden' id="commentUserID" name="commentUserID" value="{:session('userID')}">
+                <input type='hidden' id="timestamp" name="commentTime" value="">
+
+
                 <div class="form-group">
                     <label for="reply">回复内容:</label>
-                    <textarea class="form-control" id="reply" rows="3"></textarea>
+                    <textarea class="form-control"  name="commentContent"  id="reply" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">提交回复</button>
             </form>
@@ -81,5 +131,36 @@
     </div>
 
 </body>
+
+{/block}
+
+
+
+{block name='js'}
+<script>
+    // 获取当前时间并格式化为 YYYYMMDDHHMMSS
+    function getCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const formattedDateTime = `${year}${month}${day}${hours}${minutes}${seconds}`;
+        return formattedDateTime;
+    }
+
+    // 更新<input>标签的 value 属性
+    function updateInputValue() {
+        const inputElement = document.getElementById('timestamp');
+        const currentDateTime = getCurrentDateTime();
+        inputElement.value = currentDateTime;
+    }
+
+    // 当页面加载时更新<input>标签的 value 属性
+    updateInputValue();
+</script>
 
 {/block}

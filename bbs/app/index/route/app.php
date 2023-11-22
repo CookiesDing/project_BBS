@@ -8,7 +8,10 @@ Route::get("/","Index/index");
 // //后台组
 Route::group(function () {
     // Route::resource('index','Index');
-    Route::get('index/create','Index/create');
+    Route::get('index/create','Index/create');          //不能在未登录状态下发帖子
+    Route::get('index/comment','Index/comment');  
+
+
  })->middleware(function ($request, \Closure $next) {
      if (!session('?admin')) {
         dump('11');

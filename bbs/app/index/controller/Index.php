@@ -29,18 +29,19 @@ class Index
         // dump(Session::all());
         // dump(Session::get('admin'));
         return view('/post/index', [                                                     //相对路径：目录在 view\index下 根目录为index.    
-            'list'  => IndexModel::withSearch(['postTitle', 'postContent', 'postTime', 'userName'], [        //如果view函数的地址中 为view/public/toast ，则会访问view\admin\view\public\toast.html，符合针对根目录admin的后续访问规则。
+            'list'  => IndexModel::withSearch(['postTitle', 'postContent', 'postTime', 'userName','postLastReplyTime'], [        //如果view函数的地址中 为view/public/toast ，则会访问view\admin\view\public\toast.html，符合针对根目录admin的后续访问规则。
                 'postTitle' => request()->param('postTitle'),                                   //如果view函数地址 为view/public/toast.html  通过访问/admin/user.html可以成功访问到视图 模板文件存在:view/public/toast.html
                 'postContent' => request()->param('postContent'),
                 'postTime' => request()->param('postTime'),
                 'userName' => request()->param('userName'),
+                'postLastReplyTime' => request()->param('postLastReplyTime'),
             ])->paginate(
                 [
                     'list_rows' => 10,
                     'query' => request()->param(),
                 ]
             ),
-            'orderPostID' => request()->param('postID') == 'desc' ? 'asc' : 'desc',
+            'orderReplyTime' => request()->param('postLastReplyTime') == 'desc' ? 'asc' : 'desc',
             'orderTime' => request()->param('postTime') == 'desc' ? 'asc' : 'desc',
 
         ]);

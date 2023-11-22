@@ -9,6 +9,7 @@
     }
 
     .card {
+        position: relative;
         border: none;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -23,6 +24,7 @@
 
     .card-body {
         padding: 1.5rem;
+        /* padding-top: 20px; 添加这行来实现向下移动 */
         display: flex;
         flex-direction: column;
     }
@@ -36,7 +38,9 @@
         font-size: 0.8rem;
         color: #6c757d;
         /* Bootstrap 中的文本次要颜色 */
-        margin-top: auto;
+        bottom: 110px;
+        margin-top: auto; 
+        /* position: absolute; */
         /* 将发布信息推到卡片底部 */
         display: flex;
         justify-content: space-between !important;
@@ -89,6 +93,7 @@
     .card-body a {
     text-decoration: none; /* 移除下划线 */
     color: inherit; /* 继承父元素的文本颜色 */
+    
 }
 </style>
 </head>
@@ -116,8 +121,12 @@
             </div>
 
             <th class="text-center {$orderTime == 'desc' ? '' : 'dropup'}">
-                <a style="margin-top:8px;margin-left:400px" href="{:url('/index/index')}?&postTime={$orderTime}" class="dropdown-toggle
-                text-secondary text-decoration-none">时间排序</a>
+                <a style="margin-top:8px;margin-left:280px" href="{:url('/index/index')}?&postTime={$orderTime}" class="dropdown-toggle
+                text-secondary text-decoration-none">发布时间排序</a>
+            </th>
+            <th class="text-center {$orderTime == 'desc' ? '' : 'dropup'}">
+                <a style="margin-top:8px;margin-left:10px" href="{:url('/index/index')}?&postLastReplyTime={$orderReplyTime}" class="dropdown-toggle
+                text-secondary text-decoration-none">回复时间排序</a>
             </th>
         </div>
     </form>
@@ -130,7 +139,7 @@
             <!-- 第一个帖子 -->
             <div class="col-12">
                 <div class="card">
-                    <a style=" text-decoration: none; color: inherit;"href="{:url('/index/comment/?PostID='.$obj.postID.'#')}">
+                    <a style=" text-decoration: none; color: inherit;"href="{:url('/index/comment/?postID='.$obj.postID.'#')}">
                     <div class="card-body">
                       
                             <h5 class="card-title post-title">
@@ -138,9 +147,11 @@
                             </h5>
                             <p class="card-text">{$obj.postContent}</p>
                             <p class="post-info ">
-                                <span>发布时间:{$obj.postTime}</span>
-                                <span class="post-author">发布人:{$obj.userName}</span>
-                        
+                                <span><br>发布时间:{$obj.postTime} <br>
+                                    最新回复:{$obj.postLastReplyTime}
+                                </span>
+                                <span class="post-author"><br><br>发布人:{$obj.userName}</span>
+                            </p>
                     </div>
                 </a>
                 </div>

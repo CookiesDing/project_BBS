@@ -14,7 +14,9 @@ class Comment extends Validate
      * @var array
      */
     protected $rule = [
+        'commentUserID' => 'require',
         'commentContent|回复内容' => 'require|max:255',
+       
     ];
 
     /**
@@ -23,5 +25,7 @@ class Comment extends Validate
      *
      * @var array
      */
-    protected $message = [];
+    protected $message = [
+        'commentUserID.require'         =>             '你需要先登录！',
+    ];
 }
