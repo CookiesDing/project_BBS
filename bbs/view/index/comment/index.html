@@ -6,11 +6,12 @@
     /* 自定义样式 */
     .post-content {
         background-color: #f8f9fa;
-        padding-top: 20px;
+        padding-top: 10px;
         padding-left: 20px;
         padding-right: 20px;
-        padding-bottom: 5px;
+        padding-bottom: 3px;
 
+        margin-top: -210px;
         margin-bottom: 20px;
         border-radius: 10px;
         /* 圆角 */
@@ -34,7 +35,8 @@
     }
 
     .spacer {
-        margin-bottom: 20px; /* 调整留白的大小 */
+        margin-bottom: 20px;
+        /* 调整留白的大小 */
     }
 
     .reply-time {
@@ -52,12 +54,13 @@
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
     .post-info {
         font-size: 0.8rem;
         color: #6c757d;
         /* Bootstrap 中的文本次要颜色 */
         margin-top: auto;
-       
+
         /* 将发布信息推到卡片底部 */
         display: flex;
         justify-content: space-between !important;
@@ -72,26 +75,26 @@
 
 <body>
 
-    <div class="container mt-5">
+    <div class="container mt-5" style="margin-top: -10vw;">
         {assign name="empty" value='<tr>
             <td colspan="9" class="text-center text-muted">还没有评论！</td>
         </tr>'}
         {volist name="list_post" id="obj_post"}
         <!-- 主题区 -->
-        <div class="post-content">
+        <div class="post-content mt-5">
             <h2>{$obj_post.postTitle}</h2>
             <p>{$obj_post.postContent}</p>
             <p class="post-info ">
                 <span class="post-author">发布人:{$obj_post.userName}</span>
                 <span>{$obj_post.postTime}</span>
-                
+
             </p>
         </div>
         {/volist}
         <!-- 评论区 -->
         <div class="comment-section">
             <h3>评论区</h3>
-           
+
             {volist name="list_comment" id="obj_comment" empty="$empty"}
             <div class="comment">
                 <p><strong>{$obj_comment.userName}:</strong> {$obj_comment.commentContent}</p>
@@ -101,20 +104,17 @@
 
             {/volist}
         </div>
-        <!-- 分页 -->
-    <div style="margin:10px 10px 20px 30px;height:80px;">
-        {$list_comment|Raw}
-    </div>
-       
+
+
         <!-- 回复区 -->
         <div class="reply-section">
             <h3>回复区</h3>
 
             <!-- 回复表单 -->
-            <form action="{:url('/index/comment')}" method="post" >      <!-- 必须提供comment所有需要的参数 -->
-                <input type='hidden'id="commentID" name="commentID" value="">
+            <form action="{:url('/index/comment')}" method="post"> <!-- 必须提供comment所有需要的参数 -->
+                <input type='hidden' id="commentID" name="commentID" value="">
                 {volist name="list_post" id="obj"}
-                <input type='hidden'id="commentPostID" name="commentPostID" value="{$obj.postID}">
+                <input type='hidden' id="commentPostID" name="commentPostID" value="{$obj.postID}">
                 {/volist}
                 <input type='hidden' id="commentUserID" name="commentUserID" value="{:session('userID')}">
                 <input type='hidden' id="timestamp" name="commentTime" value="">
@@ -122,12 +122,15 @@
 
                 <div class="form-group">
                     <label for="reply">回复内容:</label>
-                    <textarea class="form-control"  name="commentContent"  id="reply" rows="3"></textarea>
+                    <textarea class="form-control" name="commentContent" id="reply" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">提交回复</button>
             </form>
         </div>
-
+        <!-- 分页 -->
+        <div style="margin:10px 10px 20px 30px;height:40px;">
+            {$list_comment|Raw}
+        </div>
     </div>
 
 </body>

@@ -1,7 +1,7 @@
 <?php
 
 namespace app\admin\controller;
-use app\model\User as UserModel;
+use app\model\Admin as AdminModel;
 use app\Request;
 use think\facade\Validate;
 
@@ -23,12 +23,12 @@ class Login
 
         //验证用户名或密码
         $validate = Validate::rule([
-            'userName|用户名' => 'unique:user,userName^userPassword',
+            'adminName|用户名' => 'unique:admin,adminName^adminPassword',
         ]);
         $result = $validate->check(
             [
-                'userName' => $data['userName'],
-                'userPassword' => $data['userPassword'],
+                'adminName' => $data['adminName'],
+                'adminPassword' => $data['adminPassword'],
             ]
 
         );
@@ -50,11 +50,11 @@ class Login
                 'url_path' => url('/admin/login/')
             ]);
         } else {
-            $user=UserModel::where('userName', $data['userName'])->find();
+            $admin=AdminModel::where('adminName', $data['adminName'])->find();
             // return json($user);
             // session('userID', $data['userID']);
-            session('admin', $data['userName']);
-            session('userID', $user['userID']);
+            session('admin', $data['adminName']);
+            session('adminID', $admin['adminID']);
             return redirect('/admin/user');
         }
     }
@@ -62,7 +62,7 @@ class Login
     public function out()
     {
         session('admin', null);
-        session('userID', null);
+        session('adminID', null);
         return redirect('/admin/login/');
     }
 }

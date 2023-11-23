@@ -3,7 +3,7 @@
 {block name='main'}
 <!-- 添加用户UI -->
 <form action="{:url('/index/user')}" method="post">
-    <fieldset class="w-75 m-auto">
+    <fieldset class="w-80 m-5">
         <div class="form-group row">
             <label for="username" class="col-2 col-form-label">用户名</label>
             <div class="col-8">
@@ -13,6 +13,7 @@
         <div class="form-group row">
             <label for="password" class="col-2 col-form-label">密码</label>
             <div class="col-8">
+                <input type="password" hidden autocomplete="new-password">
                 <input type="password" id="userPassword" name="userPassword" class="form-control" 
                     placeholder="请输入至少6位密码">
             </div>

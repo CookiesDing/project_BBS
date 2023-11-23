@@ -35,6 +35,10 @@ Route::post('post', 'Post/save');
 Route::resource('comment', 'Comment');
 Route::post('comment', 'Comment/save');
 
+//管理模块
+Route::resource('admin', 'Admin');
+Route::post('admin', 'Admin/save');
+
 //登录模块路由
 Route::group(function () {
     Route::get('login', 'Login/index')->middleware(function ($request, \Closure

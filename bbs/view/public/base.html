@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    /* 自定义 CSS 样式 */
+
+</style>
 
 <head>
     <meta charset="UTF-8">
@@ -22,21 +26,32 @@
                 {:session('admin')}
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{:url('/admin/user/'.session('userID').'/edit')}" method="post">个人中心</a>
+                <!-- <a class="dropdown-item" href="{:url('/admin/user/'.session('userID').'/edit')}" method="post">个人中心</a> -->
                 <a href="{:url('/admin/logout/')}" class="dropdown-item" href="#">退出管理</a>
             </div>
         </div>
     </nav>
 
     <!--核心部分-->
-    <div class="container pt-5 mt-5">
+    <div class="container pt-4 ">
         <div class="row align-items-center">
-            <div class="col-1 siadebar">
+            <div class="col-1 siadebar"style="
+                 height: vh;
+        /* 使侧边栏高度铺满整个视口 */
+        position: fixed;
+        /* 将侧边栏固定在屏幕上 */
+        top: 10vw;
+        /* 从顶部开始定位 */
+        left: 2vw;
+        /* 从左侧开始定位 */
+        background-color: ;
+        /* 侧边栏的背景色 */
+        padding-top: 60px;
+        /* 上边距，确保内容不会被导航栏遮挡 */">
                 <a href="{:url('/admin/user/')}" class="btn btn-secondary">用户管理</a>
-                <button class="btn btn-secondary">用户权限管理</button>
-                <a href="{:url('/admin/post/')}"class="btn btn-secondary">帖子管理</a>
-                <a href="{:url('/admin/comment/')}"class="btn btn-secondary">评论管理</a>
-
+                <a href="{:url('/admin/post/')}" class="btn btn-secondary">帖子管理</a>
+                <a href="{:url('/admin/comment/')}" class="btn btn-secondary">评论管理</a>
+                <a href="{:url('/admin/admin/')}" class="btn btn-secondary">管理员管理</a>
 
             </div>
             <div class="col-11 main">
@@ -53,7 +68,7 @@
     <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.bundle.min.js"></script>
 
-{block name='js'}{/block}
+    {block name='js'}{/block}
 </body>
 
 </html>

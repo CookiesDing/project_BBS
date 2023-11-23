@@ -1,0 +1,61 @@
+{extend name="../public/base"}
+{block name='title'}用户列表{/block}
+{block name='main'}
+
+<form action="{:url('/admin/admin')}" class="pb-3"> <!-- 为http://127.0.0.1:8000/ admin/user.html-->
+    <div class="form-row">
+        <div class="col-form-label">
+            <label ><br></label>
+        </div>
+       
+    </div>
+</form>
+<!-- 数据列表 -->
+<table class="table table-bordered">
+    <thead class="bg-light main">
+        <tr >
+            <th class="text-center">adminID</th>
+            <th class="text-center">管理员名称</th>
+            <th class="text-center">管理员密码</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {assign name="empty" value='<tr>
+            <td colspan="9" class="text-center text-muted">没有数据</td>
+        </tr>'}
+        {volist name="list" id="obj" empty="$empty"}
+        <tr>
+            <td class="text-center">{$obj.adminID}</td>
+            <td class="text-center">{$obj.adminName}</td>
+            <td class="text-center" style="font-size: 14px;">{$obj.adminPassword}</td>
+
+            <td>
+                <form action="{:url('/admin/admin/'.$obj.adminID)}" method="post">
+                    <a href="{:url('/admin/admin/'.$obj.adminID.'/edit')}" class="btn btn-warning btn-sm">修改</a>
+                    <!-- <a href="{:url('/admin/admin/'.$obj.adminID.'/edit')}" class="btn btn-warning btn-sm">修改</a> -->
+    
+
+                </form>
+            </td>
+        </tr>
+        {/volist}
+    </tbody>
+
+</table>
+
+<!-- 分页 -->
+
+{$list|Raw}
+
+
+{/block}
+{block name='js'}
+<script type="text/javascript">
+    $('.btn-delete').click(() => {
+        let flag = confirm('真的要删除这条数据吗？');
+        return flag ? true : false;
+    })
+</script>
+
+{/block}

@@ -24,13 +24,13 @@
 
         <div class="nav-item dropdown mr-5">
             <div class="nav-item dropdown mr-5">
-                {if condition="empty(session('admin'))"}
+                {if condition="empty(session('user'))"}
                     <!-- 未登录时只显示登录按钮 -->
                     <a href="{:url('/index/login')}" class="nav-link text-secondary">登录</a>
                 {else /}
                     <!-- 登录后显示用户名和下拉框信息 -->
                     <a class="nav-link dropdown-toggle text-secondary" href="#" data-toggle="dropdown">
-                        {:session('admin')}
+                        {:session('user')}
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{:url('/index/index/'.session('userID').'/edit')}" method="post">个人中心</a>
@@ -48,7 +48,7 @@
     </nav>
 
     <!--核心部分-->
-    <div class="container pt-3 mt-1">
+    <div class="container pt-3">
         {block name='main'}{/block}
     </div>
 

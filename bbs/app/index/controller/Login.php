@@ -29,10 +29,12 @@ class Login
         $result = $validate->check(
             [
                 'userName' => $data['userName'],
-                'userPassword' => $data['userPassword'],
+                'userPassword' => sha1($data['userPassword']),
+                // dd(sha1($data['userPassword']))
             ]
 
         );
+        // dd($request->all());
 
         ///用户名验证
         if ($result) {
@@ -53,7 +55,7 @@ class Login
         } else {
             $user=UserModel::where('userName', $data['userName'])->find();
             // return json($user);
-            session('admin', $data['userName']);
+            session('user', $data['userName']);
             session('userID', $user['userID']);
             return redirect('/index/index');
             // dump(Session::all());
@@ -62,7 +64,7 @@ class Login
 
     public function out()
     {
-        session('admin', null);
+        session('user', null);
         session('userID', null);
         return redirect('/index/index/');
     }

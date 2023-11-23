@@ -79,7 +79,8 @@ class User
             ]);
         }
 
-
+        //密码加密
+        $data['userPassword'] = sha1($data['userPassword']);
         //写入数据库
         $id = UserModel::create($data)->getData('userID');
 
@@ -144,9 +145,9 @@ class User
         }
        
 
-        //
+        //如有密码，则写入
         if(!empty($data['newpasswordnot'])) {
-        $data['userPassword']=$data['newpasswordnot'];
+        $data['userPassword']=sha1($data['newpasswordnot']);
         }
 
 

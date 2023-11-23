@@ -13,6 +13,7 @@ use think\Collection;
 use app\validate\Comment as CommentValidate;
 use think\exception\ValidateException;
 use app\model\post as PostModel;
+use think\facade\Session;
 
 class Comment
 {
@@ -52,7 +53,7 @@ class Comment
                 ]
             ),
 
-            // 'orderPostID' => request()->param('postID') == 'desc' ? 'asc' : 'desc',
+            'orderCommentTime' => request()->param('commentTime') == 'desc' ? 'asc' : 'desc',
             // 'orderTime' => request()->param('postTime') == 'desc' ? 'asc' : 'desc',
 
         ]);
@@ -80,6 +81,7 @@ class Comment
     {
         $data = $request->param();
         dump($data);
+       dump(Session::all());
         $postid=$request->param('commentPostID');
         //    dump($request->param('userRegisterTime'));
         try {

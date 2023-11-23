@@ -13,7 +13,7 @@ Route::group(function () {
 
 
  })->middleware(function ($request, \Closure $next) {
-     if (!session('?admin')) {
+     if (!session('?user')) {
         dump('11');
          return redirect('/index/login');
      }
@@ -33,7 +33,7 @@ Route::post('comment', 'Comment/save');
 //登录模块路由
 Route::group(function () {
     Route::get('login', 'Login/index')->middleware(function ($request, \Closure $next) {
-        if (session('?admin')) {                    //如果已经有了session,跳转到用户列表
+        if (session('?user')) {                    //如果已经有了session,跳转到用户列表
             return redirect('/index/index');
         }
         return $next($request);
