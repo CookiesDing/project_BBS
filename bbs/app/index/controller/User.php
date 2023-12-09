@@ -130,7 +130,7 @@ class User
     {
         //
         $data = $request->param();
-            dump($data);
+            // dump($data);
         //    dump($request->param('userRegisterTime'));
         try {
             validate(UserValidate::class)->scene('update')->check($data);

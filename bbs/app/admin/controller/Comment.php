@@ -103,7 +103,7 @@ class Comment
           try {
               validate(CommentValidate::class)->scene('')->check($data);
           } catch (ValidateException $e) {
-              // return $e->getError();
+            //   return $e->getError();
               return view('view/public/toast.html', [                  //目录在 view\admin下 根目录为admin  认为view函数中末尾加入了.html会转换到bbs目录下
                   'infos' => $e->getError(),
                   'url_text' => '返回上一页',
@@ -112,14 +112,16 @@ class Comment
           }
   
   
-            //dd($data);
+            // dd($data);
           $id = CommentModel::update($data)->getData('commentID');
-  
+          $postid=$request->param('commentPostID');
+        //   '/index/comment/?postID='.$postid.''
+
           if ($id) {
               return view('view/public/toast.html', [
                   'infos' => '修改成功',
-                  'url_text' => '去首页',
-                  'url_path' => url('/admin/comment/')
+                  'url_text' => '回到上一级',
+                  'url_path' => url('/admin/comment/?commentPostID='.$postid.'')
               ]);
           } else {
               return '修改失败';
@@ -135,10 +137,12 @@ class Comment
     public function delete($id)
     {
          //
+
+       
          if (CommentModel::destroy($id)) {
             return view('view/public/toast.html', [
                 'infos' => '删除成功',
-                'url_text' => '去首页',
+                'url_text' => '回到首页',
                 'url_path' => url('/admin/comment/')        //传递给view模板，按照http://127.0.0.1:8000/处理。
             ]);
         } else {

@@ -80,8 +80,8 @@ class Comment
     public function save(Request $request)
     {
         $data = $request->param();
-        dump($data);
-       dump(Session::all());
+    //     dump($data);
+    //    dump(Session::all());
         $postid=$request->param('commentPostID');
         //    dump($request->param('userRegisterTime'));
         try {
@@ -89,7 +89,7 @@ class Comment
         } catch (ValidateException $e) {
             // return $e->getError();
            
-            dump($postid);
+            // dump($postid);
             return view('view/public/toast.html', [                  //目录在 view\admin下 根目录为admin  认为view函数中末尾加入了.html会转换到bbs目录下
                 'infos' => $e->getError(),
                 'url_text' => '返回上一页',
@@ -106,7 +106,7 @@ class Comment
         //获取最新的评论
         $newestcommenttime=$request->param('commentTime');
 
-        dump($newestcommenttime);
+        // dump($newestcommenttime);
         PostModel::where('postID', $postid)->
         update(['postLastReplyTime'=>$newestcommenttime]);
        

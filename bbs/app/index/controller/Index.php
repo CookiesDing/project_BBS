@@ -69,7 +69,7 @@ class Index
         // $request->session();
 
         $data = $request->param();
-        dump($data);
+        // dump($data);
         //    dump($request->param('userRegisterTime'));
         try {
              validate(PostValidate::class)->scene('')->check($data);
@@ -88,12 +88,12 @@ class Index
 
         if ($id) {
             return view('view/public/toast.html', [
-                'infos' => '注册成功',
+                'infos' => '发帖成功',
                 'url_text' => '去首页',
                 'url_path' => url('/index/index/')
             ]);
         } else {
-            return '注册失败';
+            return '发帖失败';
         }
     }
 
